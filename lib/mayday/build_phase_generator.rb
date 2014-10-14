@@ -9,7 +9,13 @@ module Mayday
     end
 
     def to_ruby
-      @flags.map(&:function_def_string).join +  <<-CODE
+      function_defs = @flags.map(&:function_def_string).join
+
+      <<-CODE
+# encoding: utf-8
+Encoding.default_external = "utf-8"
+
+#{function_defs}
 
 Dir[ENV["SRCROOT"] + "/**/*.{m,h,swift}"].each do |filename|
   # Could be a dir with .m, like Underscore.m's dir
