@@ -13,11 +13,22 @@ module Mayday
       ""
     end
 
+    def block_string
+      case @block
+      when String
+        @block
+      when Proc
+        @block.to_source
+      else
+        raise TypeError, "#{self.class}'s block has invalid type of #{@block.class}"
+      end
+    end
+
     def function_def_string
       <<-CODE
 def #{function_name}(file_path, file_contents)
   line_number_to_warning_hash = lambda do 
-    #{@block.to_source}.call(file_contents)
+    #{block_string}.call(file_contents)
   end.call
 
   if line_number_to_warning_hash.keys.count > 0
