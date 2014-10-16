@@ -32,13 +32,13 @@ module Mayday
       @xcode_proj = Xcodeproj::Project.open(real_xcodeproj_path)
     end
 
-    def warning(message, &block)
-      @build_phase_generator.flags << Warning.new(message, block)
+    def warning(&block)
+      @build_phase_generator.flags << Warning.new(block)
     end
     private :warning
 
-    def error(message, &block)
-      @build_phase_generator.flags << Error.new(message, block)
+    def error(&block)
+      @build_phase_generator.flags << Error.new(block)
     end
     private :error
 

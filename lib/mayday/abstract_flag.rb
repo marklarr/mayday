@@ -3,28 +3,29 @@ require 'sourcify'
 module Mayday
   class AbstractFlag
 
-    attr_accessor :message
+    @@function_names = []
     
-    def initialize(message, block)
+    def initialize(block)
       @block = block
-      @message = message
     end
 
     def message_prefix
       ""
     end
 
-    def full_message
-      message_prefix + @message
-    end
-
     def function_def_string
       <<-CODE
-
 def #{function_name}(file_path, file_contents)
-  line_number = lambda { #{@block.to_source}.call(file_contents) }.call
-  if line_number
-    "\#{file_path}:\#{line_number}: #{full_message} [Wmayday]"
+  line_number_to_warning_hash = lambda do 
+    #{@block.to_source}.call(file_contents)
+  end.call
+
+  if line_number_to_warning_hash.keys.count > 0
+    final_warning_array = []
+    line_number_to_warning_hash.map do |line_number, warning_str|
+      final_warning_array << "\#{file_path}:\#{line_number}: #{message_prefix}\#{warning_str} [Wmayday]"  
+    end
+    final_warning_array.join("\n")
   else
     false
   end
@@ -33,7 +34,11 @@ CODE
     end
 
     def function_name
-      @function_name ||= message.gsub(/\s/, "").gsub(/[^a-zA-Z]/, "") + "_#{rand(10000)}"
+      @function_name ||= begin
+        # Enforce uniqueness 
+        candidate_function_name = "abstract_flag_matcher_#{rand(10000)}"
+        @@function_names.include?(candidate_function_name) ? function_name : candidate_function_name
+      end
     end
 
   end
