@@ -32,9 +32,9 @@ CODE
     end
 
     def call_flag_functions_string(file_var_name)
-      flags.map do |flag|
-        "abstract_flag_output = #{flag.function_name}(#{file_var_name}); puts abstract_flag_output if abstract_flag_output;"
-      end.join("\\n")
+      "file_contents = file.read\n" + flags.map do |flag|
+        "abstract_flag_output = #{flag.function_name}(#{file_var_name}.path, file_contents); puts abstract_flag_output if abstract_flag_output;"
+      end.join("\n")
     end
 
   end

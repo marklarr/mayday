@@ -21,10 +21,10 @@ module Mayday
     def function_def_string
       <<-CODE
 
-def #{function_name}(file)
-  line_number = lambda { #{@block.to_source}.call(file.read) }.call
+def #{function_name}(file_path, file_contents)
+  line_number = lambda { #{@block.to_source}.call(file_contents) }.call
   if line_number
-    "\#{file.path}:\#{line_number}: #{full_message} -[Wmayday]"
+    "\#{file_path}:\#{line_number}: #{full_message} [Wmayday]"
   else
     false
   end
