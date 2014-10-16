@@ -3,6 +3,7 @@ module Mayday
 
     def initialize(project, target_name=nil)
       @project = project
+      @target_name = target_name
     end
 
     def integrate(build_phase_generator)
@@ -23,7 +24,7 @@ module Mayday
 
     def native_targets_to_integrate
       @native_targets_to_integrate ||= @project.targets.select do |target| 
-        target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && (!target_name || target.name == target_name)
+        target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && (!@target_name || @target.name == @target_name)
       end
     end
     private :native_targets_to_integrate

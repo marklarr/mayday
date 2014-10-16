@@ -3,6 +3,8 @@ require 'mayday/build_phase_generator'
 require 'mayday/abstract_flag/warning'
 require 'mayday/abstract_flag/error'
 
+require 'pathname'
+
 module Mayday
   class Reader
 
@@ -12,7 +14,8 @@ module Mayday
     end
 
     def read
-      instance_eval(@mayday_file.read)
+      do_default_target
+      instance_eval(@mayday_file.read, @mayday_file.path, 0)
       @build_phase_generators.each do |target_name, build_phase_generator|
         # TODO: No project
         # TODO: Use all targets key in TargetIntegrator
@@ -23,16 +26,18 @@ module Mayday
 
     def xcode_proj(xcode_proj_path)
       # TODO: Invalid path
-      @xcode_proj = Xcodeproj::Project.open(xcode_proj_path)
+      # TODO: absolute vs relative path
+      real_xcodeproj_path = File.join(Pathname.new(@mayday_file.path).realpath.parent, xcode_proj_path)
+      @xcode_proj = Xcodeproj::Project.open(real_xcodeproj_path)
     end
 
     def warning(message, &block)
-      @current.target.flags << Warning.new(message, block)
+      @current_target.flags << Warning.new(message, block)
     end
     private :warning
 
     def error(message, &block)
-      @current.target.flags << Error.new(message, block)
+      @current_target.flags << Error.new(message, block)
     end
     private :error
 

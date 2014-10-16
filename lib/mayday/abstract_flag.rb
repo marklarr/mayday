@@ -5,7 +5,7 @@ module Mayday
 
     attr_accessor :message
     
-    def initialize(message, &block)
+    def initialize(message, block)
       @block = block
       @message = message
     end
