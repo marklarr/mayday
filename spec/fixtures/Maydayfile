@@ -1,4 +1,5 @@
 xcode_proj "Fixtures/Fixtures.xcodeproj"
+main_target "Fixtures"
 
 warning "TODO:" do |file_contents|
   lines = file_contents.split("\n")

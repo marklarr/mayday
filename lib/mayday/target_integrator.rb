@@ -23,8 +23,8 @@ module Mayday
     end
 
     def native_targets_to_integrate
-      @native_targets_to_integrate ||= @project.targets.select do |target| 
-        target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && (!@target_name || @target.name == @target_name)
+      @native_targets_to_integrate ||= @project.targets.select do |target|
+        target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && (!@target_name || target.name == @target_name)
       end
     end
     private :native_targets_to_integrate
