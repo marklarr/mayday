@@ -1,0 +1,5 @@
+warning "TODO:" do |file_contents|
+  lines = file_contents.split("\n")
+  lines.each_with_index { |line, line_number| return line_number + 1 if line =~/^.+TODO.+$/ }
+  return nil
+end

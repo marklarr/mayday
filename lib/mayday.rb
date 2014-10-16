@@ -1,5 +1,5 @@
 require "mayday/version"
-require "mayday/build_phase_generator"
+require "mayday/reader"
 
 module Mayday
 end

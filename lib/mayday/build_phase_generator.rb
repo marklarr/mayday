@@ -1,15 +1,17 @@
-require "mayday/error"
-require "mayday/warning"
+require "mayday/abstract_flag/error"
+require "mayday/abstract_flag/warning"
 
 module Mayday
   class BuildPhaseGenerator
 
-    def initialize(flags)
-      @flags = flags || []
+    attr_accessor :flags
+
+    def initialize
+      self.flags = []
     end
 
     def to_ruby
-      function_defs = @flags.map(&:function_def_string).join
+      function_defs = flags.map(&:function_def_string).join
 
       <<-CODE
 # encoding: utf-8
@@ -30,7 +32,7 @@ CODE
     end
 
     def call_flag_functions_string(file_var_name)
-      @flags.map do |flag|
+      flags.map do |flag|
         "abstract_flag_output = #{flag.function_name}(#{file_var_name}); puts abstract_flag_output if abstract_flag_output;"
       end.join("\\n")
     end
