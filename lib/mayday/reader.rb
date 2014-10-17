@@ -32,34 +32,34 @@ module Mayday
       @xcode_proj = Xcodeproj::Project.open(real_xcodeproj_path)
     end
 
-    def warning_regex(message, regex)
-      abstract_flag_regex(Warning, message, regex)
+    def warning_regex(message, regex, options={})
+      abstract_flag_regex(Warning, message, regex, options)
     end
 
-    def error_regex(message, regex)
-      abstract_flag_regex(Error, message, regex)
+    def error_regex(message, regex, options={})
+      abstract_flag_regex(Error, message, regex, options)
     end
 
-    def abstract_flag_regex(klass, message, regex)
+    def abstract_flag_regex(klass, message, regex, options={})
       block = <<-CODE
 lambda do |line|
   line =~ Regexp.new('#{regex}') ? "#{message}" : nil
 end
       CODE
-      abstract_flag(klass, :line, block)
+      abstract_flag(klass, :line, block, options)
     end
 
-    def warning(type=:line, &block)
-      abstract_flag(Warning, type, block)
+    def warning(type=:line, options={}, &block)
+      abstract_flag(Warning, type, block, options)
     end
     private :warning
 
-    def error(type=:line, &block)
-      abstract_flag(Error, type, block)
+    def error(type=:line, options={}, &block)
+      abstract_flag(Error, type, block, options)
     end
     private :error
 
-    def abstract_flag(klass, type=:line, block)
+    def abstract_flag(klass, type, block, options={})
       block_str = case block
       when String
         block
@@ -86,7 +86,7 @@ end
                       block
                     end
 
-      @build_phase_generator.flags << klass.new(final_block)
+      @build_phase_generator.flags << klass.new(final_block, options)
     end
     private :abstract_flag
 
