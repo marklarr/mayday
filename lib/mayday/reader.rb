@@ -39,7 +39,7 @@ module Mayday
     def error_regex(message, regex, options={})
       abstract_flag_regex(Error, message, regex, options)
     end
-
+    # TODO: make this :file instead of :line matchers
     def abstract_flag_regex(klass, message, regex, options={})
       block = <<-CODE
 lambda do |line|

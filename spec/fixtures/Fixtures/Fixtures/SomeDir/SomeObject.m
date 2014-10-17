@@ -10,4 +10,9 @@
 
 @implementation SomeObject
 
+- (void) willChangeValueForKey:(NSString *)key withSetMutation:(NSKeyValueSetMutationKind)mutationKind usingObjects:(NSSet *)objects // Long line is long.
+{
+    [self validateValue:nil forKeyPath:nil error:nil] && [self validateValue:nil forKeyPath:nil error:nil] && [self validateValue:nil forKeyPath:nil error:nil];
+}
+
 @end

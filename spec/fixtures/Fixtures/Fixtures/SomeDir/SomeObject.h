@@ -10,6 +10,6 @@
 
 @interface SomeObject : NSObject
 
-// TODO: Foo bar. Baz.
+// TODO: Foo bar. Baz. 
 
 @end
