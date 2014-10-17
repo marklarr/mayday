@@ -8,8 +8,10 @@ module Mayday
     def initialize(block, options={})
       @block = block
 
+      # TODO: Error for bad globs?
       @file_globs = Array(options[:files])
 
+      # TODO: Error for unexpected language
       if options[:language]
         language = options[:language].to_s
         if language == "swift"
