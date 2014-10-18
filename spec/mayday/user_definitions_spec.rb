@@ -22,6 +22,17 @@ describe Mayday::UserDefinitions do
     { :exitstatus => exitstatus, :files_to_lines_to_warnings_hash => files_to_lines_to_warnings_hash }
   end
 
+  def with_captured_stdout
+    begin
+      old_stdout = $stdout
+      $stdout = StringIO.new('','w')
+      yield
+      $stdout.string
+    ensure
+      $stdout = old_stdout
+    end
+  end
+
   let(:files_to_lines_to_warnings_hash) { @parsed_build_output[:files_to_lines_to_warnings_hash] }
 
   describe "#up" do
@@ -58,6 +69,36 @@ describe Mayday::UserDefinitions do
           user_definitions.down
           @parsed_build_output = parse_build_output
       end
+
+      it "should have passed the build" do
+        expect(@parsed_build_output[:exitstatus]).to eq(0)
+      end
+
+      it "should have no warnings or errors from Mayday" do
+        expect(files_to_lines_to_warnings_hash.count).to eq(0)
+      end
+    end
+  end
+
+  describe "#benchmark" do
+
+    it "should show benchmark data for the mayday build phase" do
+      user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
+      output = with_captured_stdout { user_definitions.benchmark }
+      matches = output.match /\s+user\s+system\s+total\s+real\nMayday\s+([0-9]+\.[0-9]+)\s+([0-9]+\.[0-9]+)\s+([0-9]+\.[0-9]+).+([0-9]+\.[0-9]+)/
+    
+      expect(matches.size).to eq(5)
+
+      real_time = matches[4].to_f
+      real_time.should be > 0.0
+    end
+
+    describe "after running xcodebuild" do 
+    before(:all) do
+        user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
+        user_definitions.benchmark
+        @parsed_build_output = parse_build_output
+    end
 
       it "should have passed the build" do
         expect(@parsed_build_output[:exitstatus]).to eq(0)
