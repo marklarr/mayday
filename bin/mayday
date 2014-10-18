@@ -13,13 +13,17 @@ Clamp do
 
   subcommand "up", "Integrate the warnings and errors from Maydayfile into your Xcode project" do
     def execute
+      puts "Integrating mayday into your project..."
       Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).up
+      puts "Done!"
     end
   end
 
   subcommand "down", "Remove the warnings and errors from Maydayfile into your Xcode project" do
     def execute
+      puts "Removing mayday from your project..."
       Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).down
+      puts "Done!"
     end
   end
 

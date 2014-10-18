@@ -27,7 +27,7 @@ module Mayday
 
     def runs_successfully?
       ENV["SRCROOT"] = @project.path.parent.to_s
-      eval(@script_generator.to_ruby(:exit_after => false))
+      eval(@script_generator.to_ruby(:exit_after => false, :output => false))
       true
     end
 
