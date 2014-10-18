@@ -13,12 +13,11 @@ module Mayday
     end
 
     def to_ruby(opts={})
-      opts[:exit_after] ||= true
+      opts[:exit_after] = true if opts[:exit_after] == nil;
       opts[:output] = true if opts[:output] == nil;
 
       function_defs = flags.map(&:function_def_string).join
-
-      exit_chunk = if opts[:after]
+      exit_chunk = if opts[:exit_after]
         <<-CODE
 if #{any_errors_variable_name}
   exit(1)

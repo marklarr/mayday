@@ -1,3 +1,5 @@
+require 'xcodeproj'
+
 module Mayday
   class TargetIntegrator
 
@@ -31,7 +33,11 @@ module Mayday
 
     def benchmark
       ENV["SRCROOT"] = @project.path.parent.to_s
-      eval("require 'benchmark'; Benchmark.bm(7) do |benchmarker| benchmarker.report('Mayday') do \n" + @script_generator.to_ruby(:exit_after => false, :output => false) + "\nend \n end")
+
+      require 'benchmark'
+      Benchmark.bm(7) do |benchmarker| 
+        benchmarker.report('Mayday') { eval(@script_generator.to_ruby(:exit_after => false, :output => false)) }
+      end
     end
 
     def native_target_to_integrate
