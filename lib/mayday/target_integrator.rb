@@ -8,11 +8,13 @@ module Mayday
     end
 
     def integrate
-      phase = existing_mayday_build_phase_for_native_target(native_target_to_integrate) || native_target_to_integrate.new_shell_script_build_phase(mayday_build_phase_name)
-      phase.shell_path = "/usr/bin/ruby"
-      phase.shell_script = @script_generator.to_ruby
-      phase.show_env_vars_in_log = '0'
-      @project.save
+      if runs_successfully?
+        phase = existing_mayday_build_phase_for_native_target(native_target_to_integrate) || native_target_to_integrate.new_shell_script_build_phase(mayday_build_phase_name)
+        phase.shell_path = "/usr/bin/ruby"
+        phase.shell_script = @script_generator.to_ruby
+        phase.show_env_vars_in_log = '0'
+        @project.save
+      end
     end
 
     def deintegrate
@@ -24,6 +26,7 @@ module Mayday
     def runs_successfully?
       ENV["SRCROOT"] = @project.path.parent.to_s
       eval(@script_generator.to_ruby(:exit_after => false))
+      true
     end
 
     def benchmark

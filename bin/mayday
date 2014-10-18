@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'clamp'
+require 'mayday'
+
+Clamp do
+  
+  self.default_subcommand = "up"
+
+  MAYDAY_FILE_PATH = "Maydayfile"
+
+  # TODO: no mayday file?
+
+  subcommand "up", "Integrate the warnings and errors from Maydayfile into your Xcode project" do
+    def execute
+      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).up
+    end
+  end
+
+  subcommand "down", "Remove the warnings and errors from Maydayfile into your Xcode project" do
+    def execute
+      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).down
+    end
+  end
+
+  subcommand "benchmark", "Output benchmark results of running your Maydayfile errors and warnings on your Xcode project" do
+    def execute
+      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).benchmark
+    end
+  end
+end

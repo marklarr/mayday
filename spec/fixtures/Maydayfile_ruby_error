@@ -1,0 +1,11 @@
+xcode_proj "Fixtures/Fixtures.xcodeproj"
+main_target "Fixtures"
+
+warning :line, :language => "swift" do |line|
+  raise "error"
+  line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : nil
+end
+
+error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => ["*AppDelegate*"]
+
+warning_regex "TODO", /^\/\/\s+TODO:.*$/

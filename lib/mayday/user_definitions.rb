@@ -1,3 +1,5 @@
+require "mayday/reader"
+
 module Mayday
   class UserDefinitions
 
