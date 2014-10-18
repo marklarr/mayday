@@ -32,7 +32,7 @@ module Mayday
     end
 
     def native_target_to_integrate
-      @@native_target_to_integrate ||= @native_targets_to_integrate ||= @project.targets.detect do |target|
+      @project.targets.detect do |target|
         target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && target.name == @target_name
       end
     end

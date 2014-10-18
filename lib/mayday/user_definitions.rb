@@ -1,21 +1,34 @@
 module Mayday
   class UserDefinitions
-    
+
     def initialize(mayday_file_path)
-      @mayday_file = File.open(mayday_file_path)
+      @mayday_file_path = mayday_file_path
     end
 
     def up
-      Reader.new(@mayday_file).to_target_integrator.integrate
+      mayday_file do |file|
+        Reader.new(file).to_target_integrator.integrate
+      end
     end
 
     def down
-      Reader.new(@mayday_file).to_target_integrator.deintegrate
+      mayday_file do |file|
+        Reader.new(file).to_target_integrator.deintegrate
+      end
     end
 
     def benchmark
-      Reader.new(@mayday_file).to_target_integrator.benchmark
+      mayday_file do |file|
+        Reader.new(file).to_target_integrator.benchmark
+      end
     end
+
+    def mayday_file
+      file = File.open(@mayday_file_path)
+      yield file
+      file.close
+    end
+    private :mayday_file
 
   end 
 end
