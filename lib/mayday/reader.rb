@@ -13,12 +13,11 @@ module Mayday
       @script_generator = ScriptGenerator.new
     end
 
-    def read
+    def to_target_integrator
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
-      # TODO: No project
-      # TODO: No main target name
-      target_integrator = TargetIntegrator.new(@xcode_proj, @main_target_name)
-      target_integrator.integrate(@script_generator)
+      # TODO: Check if no project
+      # TODO: Check if no main target name
+      TargetIntegrator.new(@xcode_proj, @script_generator, @main_target_name)
     end
 
     def main_target(main_target_name)

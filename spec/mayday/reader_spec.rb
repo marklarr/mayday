@@ -23,8 +23,8 @@ describe Mayday::Reader do
 require 'pp'
   describe "read" do
     it "should add a build phase run script to the project" do
-      reader = Mayday::Reader.new(FIXTURES_TEST_MAYDAY_FILE)
-      reader.read
+      user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
+      user_definitions.benchmark
       files_to_lines_to_warnings_hash = parse_build_output
 
       expect(files_to_lines_to_warnings_hash.count).to eq(2)
