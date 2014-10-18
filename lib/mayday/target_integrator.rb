@@ -22,6 +22,16 @@ module Mayday
       end
     end
 
+    def runs_successfully?(script_generator)
+      ENV["SRCROOT"] = @project.path.parent.to_s
+      eval(script_generator.to_ruby(:exit_after => false))
+    end
+
+    def benchmark(script_generator)
+      ENV["SRCROOT"] = @project.path.parent.to_s
+      eval("require 'benchmark'; Benchmark.bm(7) do |benchmarker| benchmarker.report('Mayday') do \n" + script_generator.to_ruby(:exit_after => false, :output => false) + "\nend \n end")
+    end
+
     def native_targets_to_integrate
       @native_targets_to_integrate ||= @project.targets.select do |target|
         target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && (!@target_name || target.name == @target_name)

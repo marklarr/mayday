@@ -17,8 +17,8 @@ module Mayday
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
       # TODO: No project
       # TODO: No main target name
-      TargetIntegrator.new(@xcode_proj, @main_target_name).integrate(@script_generator)
-      @xcode_proj.save
+      target_integrator = TargetIntegrator.new(@xcode_proj, @main_target_name)
+      target_integrator.integrate(@script_generator)
     end
 
     def main_target(main_target_name)
