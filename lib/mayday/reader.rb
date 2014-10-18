@@ -1,5 +1,5 @@
 require 'mayday/target_integrator'
-require 'mayday/build_phase_generator'
+require 'mayday/script_generator'
 require 'mayday/abstract_flag/warning'
 require 'mayday/abstract_flag/error'
 
@@ -10,14 +10,14 @@ module Mayday
 
     def initialize(mayday_file)
       @mayday_file = mayday_file
-      @build_phase_generator = BuildPhaseGenerator.new
+      @script_generator = ScriptGenerator.new
     end
 
     def read
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
       # TODO: No project
       # TODO: No main target name
-      TargetIntegrator.new(@xcode_proj, @main_target_name).integrate(@build_phase_generator)
+      TargetIntegrator.new(@xcode_proj, @main_target_name).integrate(@script_generator)
       @xcode_proj.save
     end
 
@@ -86,7 +86,7 @@ end
                       block
                     end
 
-      @build_phase_generator.flags << klass.new(final_block, options)
+      @script_generator.flags << klass.new(final_block, options)
     end
     private :abstract_flag
 
