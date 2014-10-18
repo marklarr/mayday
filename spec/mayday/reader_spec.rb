@@ -20,11 +20,11 @@ describe Mayday::Reader do
 
     return files_to_lines_to_warnings_hash
   end
-require 'pp'
+
   describe "read" do
     it "should add a build phase run script to the project" do
       user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
-      user_definitions.benchmark
+      user_definitions.up
       files_to_lines_to_warnings_hash = parse_build_output
 
       expect(files_to_lines_to_warnings_hash.count).to eq(2)
