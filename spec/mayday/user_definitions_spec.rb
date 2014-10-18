@@ -59,6 +59,13 @@ describe Mayday::UserDefinitions do
         expect(app_delegate_swift_flags.count).to eq(9)
       end
     end
+
+    describe "when using a Maydayfile containing Ruby errors" do
+      it "should raise the exception to the user when they try to 'up'" do
+        user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_RUBY_ERROR_PATH)
+        expect { user_definitions.up }.to raise_error("error")
+      end
+    end
   end
 
   describe "#down" do
