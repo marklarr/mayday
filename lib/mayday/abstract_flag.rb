@@ -49,7 +49,7 @@ def #{function_name}(file_path, file_contents)
     #{block_string}.call(file_contents)
   end.call
 
-  if line_number_to_warning_hash.keys.count > 0
+  if line_number_to_warning_hash && line_number_to_warning_hash.keys.count > 0
     final_warning_array = []
     line_number_to_warning_hash.map do |line_number, warning_str|
       final_warning_array << "\#{file_path}:\#{line_number}: #{message_prefix}\#{warning_str} [Wmayday]"  
