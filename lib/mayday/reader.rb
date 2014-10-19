@@ -48,12 +48,12 @@ end
       abstract_flag(klass, :line, block, options)
     end
 
-    def warning(type=:line, options={}, &block)
+    def warning(type, options={}, &block)
       abstract_flag(Warning, type, block, options)
     end
     private :warning
 
-    def error(type=:line, options={}, &block)
+    def error(type, options={}, &block)
       abstract_flag(Error, type, block, options)
     end
     private :error
