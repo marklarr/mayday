@@ -49,9 +49,11 @@ end
 * `language` Limits to files in the provided language. Accepts `"swift"` and `"objective-c"`.
   * `warning :line, :language => "swift" do ...`
 * `files` Limits to files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
-  * `warning :line, :files => ["*.h"] do ...`
+  * `warning_regex "Foo!", /^barbaz$/, :files => ["*.h"] do ...`
 * `exclusions` Doesn't run on files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
-  * `warning :line, :files => ["Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
+  * `warning :line, :exclude => ["*/Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
+
+**For file globs, put a `*` at the beginning to match the full system path.**
 
 ## Caveats
 
