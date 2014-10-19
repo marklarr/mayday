@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C2A82F219F357A800EC9FC0 /* ExcludedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A82F119F357A800EC9FC0 /* ExcludedFile.m */; };
 		8C2A82F619F3581F00EC9FC0 /* SomePodObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A82F519F3581F00EC9FC0 /* SomePodObject.m */; };
+		8C2A830419F3AC4900EC9FC0 /* LongFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A830319F3AC4900EC9FC0 /* LongFile.m */; };
 		8C45AC0F19EF97EB00D0B22A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45AC0E19EF97EB00D0B22A /* AppDelegate.swift */; };
 		8C45AC1119EF97EB00D0B22A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45AC1019EF97EB00D0B22A /* ViewController.swift */; };
 		8C45AC1419EF97EB00D0B22A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45AC1219EF97EB00D0B22A /* Main.storyboard */; };
@@ -33,6 +34,8 @@
 		8C2A82F119F357A800EC9FC0 /* ExcludedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcludedFile.m; sourceTree = "<group>"; };
 		8C2A82F419F3581F00EC9FC0 /* SomePodObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomePodObject.h; sourceTree = "<group>"; };
 		8C2A82F519F3581F00EC9FC0 /* SomePodObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomePodObject.m; sourceTree = "<group>"; };
+		8C2A830219F3AC4900EC9FC0 /* LongFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongFile.h; sourceTree = "<group>"; };
+		8C2A830319F3AC4900EC9FC0 /* LongFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongFile.m; sourceTree = "<group>"; };
 		8C45AC0919EF97EB00D0B22A /* Fixtures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fixtures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C45AC0D19EF97EB00D0B22A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C45AC0E19EF97EB00D0B22A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +88,15 @@
 			name = Pods;
 			path = Fixtures/Pods;
 			sourceTree = SOURCE_ROOT;
+		};
+		8C2A82FC19F3AC3000EC9FC0 /* LongFile */ = {
+			isa = PBXGroup;
+			children = (
+				8C2A830219F3AC4900EC9FC0 /* LongFile.h */,
+				8C2A830319F3AC4900EC9FC0 /* LongFile.m */,
+			);
+			name = LongFile;
+			sourceTree = "<group>";
 		};
 		8C45AC0019EF97EB00D0B22A = {
 			isa = PBXGroup;
@@ -146,6 +158,7 @@
 		8C45AC2E19EF98A700D0B22A /* SomeDir */ = {
 			isa = PBXGroup;
 			children = (
+				8C2A82FC19F3AC3000EC9FC0 /* LongFile */,
 				8C2A82F319F3580D00EC9FC0 /* Pods */,
 				8C2A82EF19F3579600EC9FC0 /* Excluded */,
 				8C45AC3019EF98BE00D0B22A /* SomeObject.h */,
@@ -258,6 +271,7 @@
 				8C2A82F619F3581F00EC9FC0 /* SomePodObject.m in Sources */,
 				8C45AC1119EF97EB00D0B22A /* ViewController.swift in Sources */,
 				8C45AC0F19EF97EB00D0B22A /* AppDelegate.swift in Sources */,
+				8C2A830419F3AC4900EC9FC0 /* LongFile.m in Sources */,
 				8C45AC3219EF98BE00D0B22A /* SomeObject.m in Sources */,
 				8C2A82F219F357A800EC9FC0 /* ExcludedFile.m in Sources */,
 			);

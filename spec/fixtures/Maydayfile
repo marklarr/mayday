@@ -2,7 +2,18 @@ xcode_proj "Fixtures/Fixtures.xcodeproj"
 main_target "Fixtures"
 
 warning :line, :language => "swift" do |line|
-  line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : nil
+  line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : false
+end
+
+warning :file do |entire_file|
+  max_number_of_lines = 500
+  
+  number_of_code_or_comment_lines = entire_file.split("\n").select { |line| line.strip.length > 0 }.count
+  if number_of_code_or_comment_lines > max_number_of_lines
+    { "1" => "File is #{number_of_code_or_comment_lines} lines long" }
+  else
+    false
+  end
 end
 
 error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => ["*AppDelegate*"]

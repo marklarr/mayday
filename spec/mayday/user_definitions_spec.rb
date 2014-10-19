@@ -48,15 +48,17 @@ describe Mayday::UserDefinitions do
       end
 
       it "should have output all files with warnings or errors in them" do
-        expect(files_to_lines_to_warnings_hash.count).to eq(2)
+        expect(files_to_lines_to_warnings_hash.count).to eq(3)
       end
 
       it "should have, for every file, output all of the warnings or errors in them" do
         some_object_h_flags = files_to_lines_to_warnings_hash['/Users/marklarsen/github.com/mayday/spec/test_fixtures/Fixtures/Fixtures/SomeDir/SomeObject.h']
         app_delegate_swift_flags = files_to_lines_to_warnings_hash['/Users/marklarsen/github.com/mayday/spec/test_fixtures/Fixtures/Fixtures/AppDelegate.swift']
+        long_file_m_flags = files_to_lines_to_warnings_hash['/Users/marklarsen/github.com/mayday/spec/test_fixtures/Fixtures/Fixtures/SomeDir/LongFile.m']
 
         expect(some_object_h_flags.count).to eq(1)
         expect(app_delegate_swift_flags.count).to eq(9)
+        expect(long_file_m_flags.count).to eq(1)
       end
     end
 
