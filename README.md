@@ -46,11 +46,11 @@ end
 
 `warning`, `error`, `warning_regex`, and `error_regex` all accept an options hash with any of the following options
 
-* `language` Limits to files in the provided language. Accepts `"swift"` and `"objective-c"`.
+* `language` limits to files in the provided language. Accepts `"swift"` and `"objective-c"`.
   * `warning :line, :language => "swift" do ...`
-* `files` Limits to files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+* `files` limits to files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
   * `warning_regex "Foo!", /^barbaz$/, :files => ["*.h"] do ...`
-* `exclusions` Doesn't run on files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+* `exclusions` doesn't run on files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
   * `warning :line, :exclude => ["*/Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
 
 **For file globs, put a `*` at the beginning to match the full system path.**
