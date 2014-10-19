@@ -1,29 +1,62 @@
-# Mayday
-
-TODO: Write a gem description
+Easily add custom warnings and errors to your Xcode project's build process.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'mayday'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install mayday
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a Maydayfile at the root of your project, defining your warnings and errors using `warning`, `error`, `warning_regex`, and `error_regex`.
+
+```ruby
+# Maydayfile
+
+# Required
+xcode_proj "CoolApp.xcodeproj"
+# Required. This will most likely be the same name as your project.
+main_target "CoolApp"
+
+# Use regular expressions to define errors or warnings on a line-by-line basis
+
+error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => "*AppDelegate*", :exclude => "Fixtures/SomeDir/Excluded/*"
+
+warning_regex "TODO", /^\/\/\s+TODO:.*$/
+
+# Do more complicated checks or return dynamic messages via blocks
+warning :line do |line|
+  line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : false
+end
+
+# You can get the whole file, too
+error :file do |entire_file|
+  max_number_of_lines = 500
+  
+  number_of_code_or_comment_lines = entire_file.split("\n").select { |line| line.strip.length > 0 }.count
+  if number_of_code_or_comment_lines > max_number_of_lines
+    # Map line numbers to errors
+    { "1" => "File is #{number_of_code_or_comment_lines} lines long" }
+  else
+    false
+  end
+end
+
+```
+
+### Options
+
+`warning`, `error`, `warning_regex`, and `error_regex` all accept an options hash with any of the following options
+
+* `language` Limits to files in the provided language. Accepts `"swift"` and `"objective-c"`.
+  * `warning :line, :language => "swift" do ...`
+* `files` Limits to files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+  * `warning :line, :files => ["*.h"] do ...`
+* `exclusions` Doesn't run on files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+  * `warning :line, :files => ["Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
+
+## Caveats
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/mayday/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+We'd love to see your ideas for improving this library! The best way to contribute is by submitting a pull request. We'll do our best to respond to your patch as soon as possible. You can also submit a [new Github issue](https://github.com/venmo/synx/issues/new) if you find bugs or have questions. :octocat:
+
+Please make sure to follow our general coding style and add test coverage for new features!
