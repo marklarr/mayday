@@ -9,17 +9,20 @@ module Mayday
       @block = block
 
       # TODO: Error for bad globs?
-      @file_globs = Array(options[:files])
+      @include_file_globs = Array(options[:files])
+      @exclude_file_globs = Array(options[:exclude])
 
       # TODO: Error for unexpected language
       if options[:language]
         language = options[:language].to_s
         if language == "swift"
-          @file_globs << "*.swift"
+          @include_file_globs << "*.swift"
         elsif language == "objective-c"
-          @file_globs << "*.{h,m}"
+          @include_file_globs << "*.{h,m}"
         end
       end
+
+      @exclude_file_globs << "*Pods/*"
     end
 
     def message_prefix
@@ -60,9 +63,17 @@ CODE
     end
 
     def file_fn_match_lines(file_path_var_name)
-      @file_fn_match_lines ||= @file_globs.map do |file_glob|
-        "return unless File.fnmatch(\"#{file_glob}\", #{file_path_var_name})"
-      end.join("\n")
+      @file_fn_match_lines ||= begin
+        includes_chunk = @include_file_globs.map do |file_glob|
+          "return unless File.fnmatch(\"#{file_glob}\", #{file_path_var_name})"
+        end.join("\n")
+
+        excludes_chunk = @exclude_file_globs.map do |file_glob|
+          "return if File.fnmatch(\"#{file_glob}\", #{file_path_var_name})"
+        end.join("\n")
+
+        includes_chunk + "\n" + excludes_chunk
+      end
     end
     private :file_fn_match_lines
 

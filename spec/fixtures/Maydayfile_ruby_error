@@ -6,6 +6,6 @@ warning :line, :language => "swift" do |line|
   line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : nil
 end
 
-error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => ["*AppDelegate*"]
+error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => "*AppDelegate*", :exclude => "Fixtures/SomeDir/Excluded/*"
 
 warning_regex "TODO", /^\/\/\s+TODO:.*$/
