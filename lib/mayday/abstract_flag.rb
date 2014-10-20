@@ -8,17 +8,18 @@ module Mayday
     def initialize(block, options={})
       @block = block
 
-      # TODO: Error for bad globs?
       @include_file_globs = Array(options[:files])
       @exclude_file_globs = Array(options[:exclude])
 
-      # TODO: Error for unexpected language
       if options[:language]
         language = options[:language].to_s
         if language == "swift"
           @include_file_globs << "*.swift"
         elsif language == "objective-c"
           @include_file_globs << "*.{h,m}"
+        else
+          puts "Unrecognized language '#{language}'".red
+          abort
         end
       end
 

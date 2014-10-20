@@ -1,4 +1,5 @@
-require "mayday/reader"
+require 'mayday/reader'
+require 'colored'
 
 module Mayday
   class UserDefinitions
@@ -26,6 +27,11 @@ module Mayday
     end
 
     def mayday_file
+      unless File.exist?(@mayday_file_path)
+        puts "No file found at #{@mayday_file_path}".red
+        abort
+      end
+
       file = File.open(@mayday_file_path)
       yield file
       file.close

@@ -15,8 +15,8 @@ module Mayday
 
     def to_target_integrator
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
-      # TODO: Check if no project
-      # TODO: Check if no main target name
+      validate_xcode_proj
+      validate_main_target_name
       TargetIntegrator.new(@xcode_proj, @script_generator, @main_target_name)
     end
 
@@ -25,8 +25,6 @@ module Mayday
     end
 
     def xcode_proj(xcode_proj_path)
-      # TODO: Invalid path
-      # TODO: absolute vs relative path
       real_xcodeproj_path = File.join(Pathname.new(@mayday_file.path).realpath.parent, xcode_proj_path)
       @xcode_proj = Xcodeproj::Project.open(real_xcodeproj_path)
     end
@@ -38,7 +36,23 @@ module Mayday
     def error_regex(message, regex, options={})
       abstract_flag_regex(Error, message, regex, options)
     end
-    # TODO: make this :file instead of :line matchers
+
+    def validate_xcode_proj
+      unless @xcode_proj
+        "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj Path/To/MyProject.xcodeproj"
+        abort
+      end
+    end
+    private :validate_xcode_proj
+
+    def validate_main_target_name
+      unless @main_target_name
+        "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj Path/To/MyProject.xcodeproj"
+        abort
+      end
+    end
+    private :validate_xcode_proj
+
     def abstract_flag_regex(klass, message, regex, options={})
       block = <<-CODE
 lambda do |line|
@@ -47,6 +61,7 @@ end
       CODE
       abstract_flag(klass, :line, block, options)
     end
+    private :abstract_flag_regex
 
     def warning(type, options={}, &block)
       abstract_flag(Warning, type, block, options)

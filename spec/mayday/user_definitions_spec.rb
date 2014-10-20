@@ -18,8 +18,14 @@ describe Mayday::UserDefinitions do
         files_to_lines_to_warnings_hash[file_path][line_number] << flag_message
       end
     end
-
     { :exitstatus => exitstatus, :files_to_lines_to_warnings_hash => files_to_lines_to_warnings_hash }
+  end
+
+  def create_mayday_file(&block)
+    string = block.to_source
+    file = File.open("Maydayfile_rspec_generated", "w")
+    file.write(block.to_source + ".call")
+    file
   end
 
   def with_captured_stdout
@@ -90,7 +96,6 @@ describe Mayday::UserDefinitions do
   end
 
   describe "#benchmark" do
-
     it "should show benchmark data for the mayday build phase" do
       user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
       output = with_captured_stdout { user_definitions.benchmark }
@@ -116,6 +121,43 @@ describe Mayday::UserDefinitions do
       it "should have no warnings or errors from Mayday" do
         expect(files_to_lines_to_warnings_hash.count).to eq(0)
       end
+    end
+  end
+
+  describe "when the Maydayfile has no xcode_proj defined" do
+    it "should abort" do
+      mayday_file = create_mayday_file do
+        main_target "hey"
+        warning { |line| return nil }
+        error { |line| return "ERROR!" }
+      end
+
+      lambda { Mayday::UserDefinitions.new(mayday_file.path).up }.should raise_error SystemExit
+    end
+  end
+
+  describe "when the Maydayfile has no main_target_name defined" do
+    it "should abort" do
+      mayday_file = create_mayday_file do
+        xcode_proj "../spec/test_fixtures/Maydayfile"
+        warning { |line| return nil }
+        error { |line| return "ERROR!" }
+      end
+
+      lambda { Mayday::UserDefinitions.new(mayday_file.path).up }.should raise_error SystemExit
+    end
+  end
+
+  describe "when the Maydayfile has a nonexistent xcode_proj defined" do
+    it "should abort" do
+      mayday_file = create_mayday_file do
+        xcode_proj "Hi.xcodeproj"
+        main_target_name "wut"
+        warning { |line| return nil }
+        error { |line| return "ERROR!" }
+      end
+
+      lambda { Mayday::UserDefinitions.new(mayday_file.path).up }.should raise_error SystemExit
     end
   end
 

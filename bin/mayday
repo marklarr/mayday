@@ -9,8 +9,6 @@ Clamp do
 
   MAYDAY_FILE_PATH = "Maydayfile"
 
-  # TODO: no mayday file?
-
   subcommand "up", "Integrate the warnings and errors from Maydayfile into your Xcode project" do
     def execute
       puts "Integrating mayday into your project..."

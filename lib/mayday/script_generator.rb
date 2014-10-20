@@ -52,7 +52,6 @@ end
     end
 
     def call_flag_functions_string(file_var_name, output)
-      # TODO: Is there a better way to check is_a without parent hitting it?
       "file_contents = file.read\n" + flags.map do |flag|
         any_errors_line = flag.class == Mayday::Error ? "#{any_errors_variable_name} = true" : ""
         <<-CODE
