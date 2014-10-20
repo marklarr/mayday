@@ -42,6 +42,10 @@ end
 
 ```
 
+And then,
+
+  $ mayday
+
 ### Options
 
 `warning`, `error`, `warning_regex`, and `error_regex` all accept an options hash with any of the following options
@@ -55,13 +59,19 @@ end
 
 ## Benchmarking
 
-You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use `mayday benchmark`
+You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use 
+
+  $ mayday benchmark
 
 ## Caveats
 
 * Since `mayday` uses [sourcify]() to write your custom `warning` and `errors` blocks to a build phase, all [gotchas in sourcify](https://github.com/ngty/sourcify#gotchas) apply to your blocks.
 * Generating efficient code to write into the build phase is difficult. `MayDay::ScriptGenerator#to_ruby` could definitely by optimized.
 
+
+## Uninstallation
+
+  $ mayday down
 
 ## Contributing
 
