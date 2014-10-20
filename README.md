@@ -45,6 +45,10 @@ end
 And then,
 
     $ mayday
+    
+Next time you build your project, your errors and warnings will be flagged
+
+![Mayday warnings and errors in Xcode](https://raw.githubusercontent.com/marklarr/mayday/master/docs/example.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6bWFya2xhcnIvbWF5ZGF5L21hc3Rlci9kb2NzL2V4YW1wbGUuanBnIiwiZXhwaXJlcyI6MTQxNDM5MDIxNH0%3D--e7969b95aea1bc76749ae9226d2ac5ffef0cf322)
 
 ### Options
 
