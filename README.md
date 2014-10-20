@@ -1,8 +1,9 @@
 Easily add custom warnings and errors to your Xcode project's build process.
 
 ## Installation
-
-    $ gem install mayday
+```sh
+$ gem install mayday
+```
 
 ## Usage
 
@@ -42,8 +43,10 @@ end
 
 And then,
 
-    $ mayday
-    
+```sh
+$ mayday
+```    
+
 Next time you build your project, your errors and warnings will be flagged
 
 ![Mayday warnings and errors in Xcode](https://raw.githubusercontent.com/marklarr/mayday/master/docs/example.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6bWFya2xhcnIvbWF5ZGF5L21hc3Rlci9kb2NzL2V4YW1wbGUuanBnIiwiZXhwaXJlcyI6MTQxNDM5MDIxNH0%3D--e7969b95aea1bc76749ae9226d2ac5ffef0cf322)
@@ -65,7 +68,9 @@ Next time you build your project, your errors and warnings will be flagged
 
 You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use 
 
-     $ mayday benchmark
+```sh
+$ mayday benchmark
+```
 
 ## Caveats
 
@@ -77,10 +82,12 @@ You may be concerned about how much overhead this will add to your build process
 
 ## Uninstallation
 
-    $ mayday down
+```sh
+$ mayday down
+```
 
 ## Contributing
 
-We'd love to see your ideas for improving this library! The best way to contribute is by submitting a pull request. We'll do our best to respond to your patch as soon as possible. You can also submit a [new Github issue](https://github.com/venmo/synx/issues/new) if you find bugs or have questions. :octocat:
+We'd love to see your ideas for improving this library! The best way to contribute is by submitting a pull request. We'll do our best to respond to your patch as soon as possible. You can also submit a [new GitHub issue](https://github.com/marklarr/mayday/issues/new) if you find bugs or have questions. :octocat:
 
 Please make sure to follow our general coding style and add test coverage for new features!
