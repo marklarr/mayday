@@ -17,9 +17,7 @@ xcode_proj "CoolApp.xcodeproj"
 main_target "CoolApp"
 
 # Use regular expressions to define errors or warnings on a line-by-line basis
-
 error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => "*AppDelegate*", :exclude => "Fixtures/SomeDir/Excluded/*"
-
 warning_regex "TODO", /^\/\/\s+TODO:.*$/
 
 # Do more complicated checks or return dynamic messages via blocks
