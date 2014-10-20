@@ -44,7 +44,7 @@ end
 
 And then,
 
-  $ mayday
+    $ mayday
 
 ### Options
 
@@ -61,7 +61,7 @@ And then,
 
 You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use 
 
-  $ mayday benchmark
+     $ mayday benchmark
 
 ## Caveats
 
@@ -71,7 +71,7 @@ You may be concerned about how much overhead this will add to your build process
 
 ## Uninstallation
 
-  $ mayday down
+    $ mayday down
 
 ## Contributing
 
