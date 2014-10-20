@@ -39,7 +39,7 @@ module Mayday
 
     def validate_xcode_proj
       unless @xcode_proj
-        "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj Path/To/MyProject.xcodeproj"
+        puts "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj 'Path/To/MyProject.xcodeproj'".red
         abort
       end
     end
@@ -47,7 +47,7 @@ module Mayday
 
     def validate_main_target_name
       unless @main_target_name
-        "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj Path/To/MyProject.xcodeproj"
+        puts "No main target specified in #{@mayday_file.path}. Specify one using main_target_name 'My Target'".red
         abort
       end
     end

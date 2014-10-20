@@ -28,7 +28,7 @@ module Mayday
 
     def mayday_file
       unless File.exist?(@mayday_file_path)
-        puts "No file found at #{@mayday_file_path}".red
+        puts "No file found at path ./#{@mayday_file_path}".red
         abort
       end
 

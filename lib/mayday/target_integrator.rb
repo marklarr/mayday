@@ -49,7 +49,7 @@ module Mayday
         native_target
       else
         valid_target_names = @project.targets.select { |target| target.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) }.map(&:name)
-        puts "Could not find a target named #{@target_name} in #{@project.path}. Available targets: #{valid_target_names.join(",")}".red
+        puts "Could not find a target named #{@target_name} in #{@project.path}. Available targets: #{valid_target_names.join(", ")}".red
         abort
       end
     end
