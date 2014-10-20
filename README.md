@@ -1,8 +1,9 @@
 Easily add custom warnings and errors to your Xcode project's build process.
 
 ## Installation
-
-    $ gem install mayday
+```sh
+$ gem install mayday
+```
 
 ## Usage
 
@@ -44,8 +45,10 @@ end
 
 And then,
 
-    $ mayday
-    
+```sh
+$ mayday
+```    
+
 Next time you build your project, your errors and warnings will be flagged
 
 ![Mayday warnings and errors in Xcode](https://raw.githubusercontent.com/marklarr/mayday/master/docs/example.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6bWFya2xhcnIvbWF5ZGF5L21hc3Rlci9kb2NzL2V4YW1wbGUuanBnIiwiZXhwaXJlcyI6MTQxNDM5MDIxNH0%3D--e7969b95aea1bc76749ae9226d2ac5ffef0cf322)
@@ -67,7 +70,9 @@ Next time you build your project, your errors and warnings will be flagged
 
 You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use 
 
-     $ mayday benchmark
+```sh
+$ mayday benchmark
+```
 
 ## Caveats
 
@@ -79,7 +84,9 @@ You may be concerned about how much overhead this will add to your build process
 
 ## Uninstallation
 
-    $ mayday down
+```sh
+$ mayday down
+```
 
 ## Contributing
 
