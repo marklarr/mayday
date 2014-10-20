@@ -48,14 +48,20 @@ end
 
 * `language` limits to files in the provided language. Accepts `"swift"` and `"objective-c"`.
   * `warning :line, :language => "swift" do ...`
-* `files` limits to files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+* `files` limits to files that have an absolute path that matches the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
   * `warning_regex "Foo!", /^barbaz$/, :files => ["*.h"] do ...`
-* `exclusions` doesn't run on files that match the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
+* `exclusions` doesn't run on files that have an absolute path that matches the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
   * `warning :line, :exclude => ["*/Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
 
-**For file globs, put a `*` at the beginning to match the full system path.**
+## Benchmarking
+
+You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use `mayday benchmark`
 
 ## Caveats
+
+* Since `mayday` uses [sourcify]() to write your custom `warning` and `errors` blocks to a build phase, all [gotchas in sourcify](https://github.com/ngty/sourcify#gotchas) apply to your blocks.
+* Generating efficient code to write into the build phase is difficult. `MayDay::ScriptGenerator#to_ruby` could definitely by optimized.
+
 
 ## Contributing
 
