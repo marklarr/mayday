@@ -148,11 +148,24 @@ describe Mayday::UserDefinitions do
     end
   end
 
-  describe "when the Maydayfile has a nonexistent xcode_proj defined" do
+  describe "when the Maydayfile cannot find the xcode_proj defined" do
     it "should abort" do
       mayday_file = create_mayday_file do
         xcode_proj "Hi.xcodeproj"
         main_target_name "wut"
+        warning { |line| return nil }
+        error { |line| return "ERROR!" }
+      end
+
+      lambda { Mayday::UserDefinitions.new(mayday_file.path).up }.should raise_error SystemExit
+    end
+  end
+
+  describe "when the Maydayfile cannot find the main_target_name defined" do
+    it "should abort" do
+      mayday_file = create_mayday_file do
+        xcode_proj "../spec/test_fixtures/Maydayfile"
+        main_target_name "Nonexistent"
         warning { |line| return nil }
         error { |line| return "ERROR!" }
       end
