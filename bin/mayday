@@ -2,6 +2,7 @@
 
 require 'clamp'
 require 'mayday'
+require 'colorize'
 
 Clamp do
   
@@ -9,11 +10,19 @@ Clamp do
 
   MAYDAY_FILE_PATH = "Maydayfile"
 
+  subcommand "init", "Creates a new Maydayfile" do
+    def execute
+      puts "Creating a new Maydayfile..."
+      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).init
+      puts "Done!".green
+    end
+  end
+
   subcommand "up", "Integrate the warnings and errors from Maydayfile into your Xcode project" do
     def execute
       puts "Integrating mayday into your project..."
       Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).up
-      puts "Done!"
+      puts "Done!".green
     end
   end
 
@@ -21,7 +30,7 @@ Clamp do
     def execute
       puts "Removing mayday from your project..."
       Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).down
-      puts "Done!"
+      puts "Done!".green
     end
   end
 

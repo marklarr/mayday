@@ -8,6 +8,22 @@ module Mayday
       @mayday_file_path = mayday_file_path
     end
 
+    def init
+      if File.exist?(@mayday_file_path)
+        puts "#{@mayday_file_path} already exists".red
+        abort
+      else
+        File.open(@mayday_file_path, 'w') do |file|
+          file.write <<-CODE
+xcode_proj '#{nearby_xcodeproj}'
+
+warning 'TODO:', /\\s+\\/\\/\\s?TODO:/
+          CODE
+          puts "#{@mayday_file_path} created".green
+        end
+      end
+    end
+
     def up
       mayday_file do |file|
         Reader.new(file).to_target_integrator.integrate
@@ -28,7 +44,8 @@ module Mayday
 
     def mayday_file
       unless File.exist?(@mayday_file_path)
-        puts "No file found at path ./#{@mayday_file_path}".red
+        puts "No #{@mayday_file_path} found".yellow
+        init
         abort
       end
 
@@ -37,6 +54,13 @@ module Mayday
       file.close
     end
     private :mayday_file
+
+    def nearby_xcodeproj
+      nearby = Dir["**/*.xcodeproj"].reject { |xcodeproj_path| xcodeproj_path =~ /Pods\//}.first
+      puts "Xcodeproj couldn't be found".yellow unless nearby
+      nearby
+    end
+    private :nearby_xcodeproj
 
   end 
 end
