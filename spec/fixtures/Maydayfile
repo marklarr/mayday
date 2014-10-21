@@ -1,5 +1,4 @@
 xcode_proj "Fixtures/Fixtures.xcodeproj"
-main_target "Fixtures"
 
 warning :line, :language => "swift" do |line|
   line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : false

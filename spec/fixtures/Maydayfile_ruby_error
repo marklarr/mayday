@@ -1,5 +1,4 @@
 xcode_proj "Fixtures/Fixtures.xcodeproj"
-main_target "Fixtures"
 
 warning :line, :language => "swift" do |line|
   raise "error"

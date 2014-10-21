@@ -16,12 +16,7 @@ module Mayday
     def to_target_integrator
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
       validate_xcode_proj
-      validate_main_target_name
-      TargetIntegrator.new(@xcode_proj, @script_generator, @main_target_name)
-    end
-
-    def main_target(main_target_name)
-      @main_target_name = main_target_name
+      TargetIntegrator.new(@xcode_proj, @script_generator)
     end
 
     def xcode_proj(xcode_proj_path)
@@ -40,14 +35,6 @@ module Mayday
     def validate_xcode_proj
       unless @xcode_proj
         puts "No Xcode project specified in #{@mayday_file.path}. Specify one using xcode_proj 'Path/To/MyProject.xcodeproj'".red
-        abort
-      end
-    end
-    private :validate_xcode_proj
-
-    def validate_main_target_name
-      unless @main_target_name
-        puts "No main target specified in #{@mayday_file.path}. Specify one using main_target_name 'My Target'".red
         abort
       end
     end
