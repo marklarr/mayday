@@ -10,8 +10,10 @@ $ gem install mayday
 Create a Maydayfile
 
 ```sh
-mayday init
+$ mayday init
 ```
+
+Add some warning and error checks to that file
 
 ```ruby
 # Maydayfile
