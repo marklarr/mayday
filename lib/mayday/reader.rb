@@ -67,7 +67,7 @@ end
       when Proc
         block.to_source
       else
-        raise TypeError, "#{self.class}'s block has invalid type of #{@block.class}"
+        raise TypeError, "#{klass}'s block has invalid type of #{@block.class}"
       end
 
       final_block = case type

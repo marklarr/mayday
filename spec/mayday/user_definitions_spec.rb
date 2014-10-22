@@ -101,6 +101,37 @@ describe Mayday::UserDefinitions do
     end
   end
 
+  describe "#init" do
+    describe "Maydayfile doesn't exist" do
+      before(:all) do
+        @mayday_file_doesnt_exist_path = "Maydayfile_doesnt_exist"
+        FileUtils.rm_rf(@mayday_file_doesnt_exist_path)
+        user_definitions = Mayday::UserDefinitions.new(@mayday_file_doesnt_exist_path)
+        user_definitions.init
+      end
+
+      after(:all) do
+        FileUtils.rm_rf(@mayday_file_doesnt_exist_path)
+      end
+
+      it "should create a valid Maydayfile prefilled with the nearest xcodeproject" do
+        user_definitions = Mayday::UserDefinitions.new(@mayday_file_doesnt_exist_path)
+        user_definitions.up
+        user_definitions.down
+      end
+    end
+
+    describe "Maydayfile already exists" do
+      it "should keep the Maydayfile as-is and abort" do
+        before_file_contents = File.open(FIXTURES_TEST_MAYDAY_FILE_PATH) { |file| file.read }
+        user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)
+        lambda { user_definitions.init }.should raise_error SystemExit
+        after_file_contents = File.open(FIXTURES_TEST_MAYDAY_FILE_PATH) { |file| file.read }
+        expect(before_file_contents).to eq(after_file_contents)
+      end
+    end
+  end
+
   describe "#benchmark" do
     it "should show benchmark data for the mayday build phase" do
       user_definitions = Mayday::UserDefinitions.new(FIXTURES_TEST_MAYDAY_FILE_PATH)

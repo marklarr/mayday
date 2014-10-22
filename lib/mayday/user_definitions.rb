@@ -17,7 +17,7 @@ module Mayday
           file.write <<-CODE
 xcode_proj '#{nearby_xcodeproj}'
 
-warning 'TODO:', /\\s+\\/\\/\\s?TODO:/
+warning_regex 'TODO:', /\\s+\\/\\/\\s?TODO:/
           CODE
           puts "#{@mayday_file_path} created".green
         end
