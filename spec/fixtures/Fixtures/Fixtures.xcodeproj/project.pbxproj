@@ -178,7 +178,6 @@
 				8C45AC0519EF97EB00D0B22A /* Sources */,
 				8C45AC0619EF97EB00D0B22A /* Frameworks */,
 				8C45AC0719EF97EB00D0B22A /* Resources */,
-				8B33CB10E8082B69E41D0720 /* Generate Mayday Flags */,
 			);
 			buildRules = (
 			);
@@ -196,7 +195,6 @@
 				8C45AC1A19EF97EB00D0B22A /* Sources */,
 				8C45AC1B19EF97EB00D0B22A /* Frameworks */,
 				8C45AC1C19EF97EB00D0B22A /* Resources */,
-				0F7A5451D7D7A72FA4AEF258 /* Generate Mayday Flags */,
 			);
 			buildRules = (
 			);
@@ -264,39 +262,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0F7A5451D7D7A72FA4AEF258 /* Generate Mayday Flags */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Mayday Flags";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/ruby;
-			shellScript = "# encoding: utf-8\nEncoding.default_external = \"utf-8\"\n\ndef abstract_flag_matcher_4304(file_path, file_contents)\n  \nreturn if File.fnmatch(\"*Pods/*\", file_path)\n\n  line_number_to_warning_hash = lambda do \n    lambda do |file_contents|\n  hash = {}\n  lines = file_contents.split(\"\n\")\n  lines.each_with_index do |line, line_number| \n    message = lambda do |line|\n  line =~ Regexp.new('(?-mix:\\s+\\/\\/\\s?TODO:)') ? \"TODO:\" : nil\nend\n.call(line)\n    hash[line_number + 1] = message if message\n  end\n  hash\nend\n.call(file_contents)\n  end.call\n\n  if line_number_to_warning_hash && line_number_to_warning_hash.keys.count > 0\n    final_warning_array = []\n    line_number_to_warning_hash.map do |line_number, warning_str|\n      final_warning_array << \"#{file_path}:#{line_number}: warning: #{warning_str} [Wmayday]\"  \n    end\n    final_warning_array.join(\"\n\")\n  else\n    false\n  end\nend\n\n\nDir[ENV[\"SRCROOT\"] + \"/**/*.{m,h,swift}\"].each do |filename|\n  # Could be a dir with .m, like Underscore.m's dir\n  if (File.file?(filename))\n    file = File.open(filename, 'r')\n    file_contents = file.read\nabstract_flag_output = abstract_flag_matcher_4304(file.path, file_contents)\nif abstract_flag_output && true\n  puts abstract_flag_output\n  \nend\n\n  end\nend\n\nif @any_errors\n  exit(1)\nelse\n  exit\nend\n\n";
-			showEnvVarsInLog = 0;
-		};
-		8B33CB10E8082B69E41D0720 /* Generate Mayday Flags */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Mayday Flags";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/ruby;
-			shellScript = "# encoding: utf-8\nEncoding.default_external = \"utf-8\"\n\ndef abstract_flag_matcher_4304(file_path, file_contents)\n  \nreturn if File.fnmatch(\"*Pods/*\", file_path)\n\n  line_number_to_warning_hash = lambda do \n    lambda do |file_contents|\n  hash = {}\n  lines = file_contents.split(\"\n\")\n  lines.each_with_index do |line, line_number| \n    message = lambda do |line|\n  line =~ Regexp.new('(?-mix:\\s+\\/\\/\\s?TODO:)') ? \"TODO:\" : nil\nend\n.call(line)\n    hash[line_number + 1] = message if message\n  end\n  hash\nend\n.call(file_contents)\n  end.call\n\n  if line_number_to_warning_hash && line_number_to_warning_hash.keys.count > 0\n    final_warning_array = []\n    line_number_to_warning_hash.map do |line_number, warning_str|\n      final_warning_array << \"#{file_path}:#{line_number}: warning: #{warning_str} [Wmayday]\"  \n    end\n    final_warning_array.join(\"\n\")\n  else\n    false\n  end\nend\n\n\nDir[ENV[\"SRCROOT\"] + \"/**/*.{m,h,swift}\"].each do |filename|\n  # Could be a dir with .m, like Underscore.m's dir\n  if (File.file?(filename))\n    file = File.open(filename, 'r')\n    file_contents = file.read\nabstract_flag_output = abstract_flag_matcher_4304(file.path, file_contents)\nif abstract_flag_output && true\n  puts abstract_flag_output\n  \nend\n\n  end\nend\n\nif @any_errors\n  exit(1)\nelse\n  exit\nend\n\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C45AC0519EF97EB00D0B22A /* Sources */ = {
