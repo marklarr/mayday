@@ -44,8 +44,7 @@ warning_regex 'TODO:', /\\s+\\/\\/\\s?TODO:/
 
     def mayday_file
       unless File.exist?(@mayday_file_path)
-        puts "No #{@mayday_file_path} found".yellow
-        init
+        puts "No #{@mayday_file_path} found".red
         abort
       end
 
