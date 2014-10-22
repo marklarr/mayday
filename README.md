@@ -7,21 +7,28 @@ $ gem install mayday
 
 ## Usage
 
-Create a Maydayfile at the root of your project, defining your warnings and errors using `warning`, `error`, `warning_regex`, and `error_regex`.
+Create a Maydayfile
+
+```sh
+mayday init
+```
 
 ```ruby
 # Maydayfile
 
 # Required
 xcode_proj "CoolApp.xcodeproj"
-# Required. This will most likely be the same name as your project.
-main_target "CoolApp"
 
 # Use regular expressions to define errors or warnings on a line-by-line basis
 error_regex "Please remove Copyright boilerplate", /^\/\/  Copyright \(c\).*$/, :files => "*AppDelegate*"
 warning_regex "TODO", /^\/\/\s+TODO:.*$/
+```
 
-# Do more complicated checks or return dynamic messages via blocks
+You can do more advanced checks, too, with blocks
+
+``` ruby
+# Maydayfile
+
 warning :line, :exclude => "Fixtures/SomeDir/Excluded/*" do |line|
   line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : false
 end
@@ -38,10 +45,9 @@ error :file do |entire_file|
     false
   end
 end
-
 ```
 
-And then,
+When you're ready, run
 
 ```sh
 $ mayday
