@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/mayday.svg)](http://badge.fury.io/rb/mayday)
+[![Build Status](https://travis-ci.org/marklarr/mayday.svg?branch=master)](https://travis-ci.org/marklarr/mayday)
+
+
 Easily add custom warnings and errors to your Xcode project's build process
 
 ## Installation
