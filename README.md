@@ -88,7 +88,7 @@ $ mayday benchmark
 
 ## Caveats
 
-* `mayday` uses [sourcify]() to write your custom `warning` and `errors` blocks to a build phase, all [gotchas in sourcify](https://github.com/ngty/sourcify#gotchas) apply to your blocks.
+* `mayday` uses [sourcify](https://github.com/ngty/sourcify) to write your custom `warning` and `errors` blocks to a build phase, all [gotchas in sourcify](https://github.com/ngty/sourcify#gotchas) apply to your blocks.
 * `mayday` copies your custom blocks, line for line, into a build phase, so all variables inside of them must be of local scope. Anything defined outside of a custom block will not be included in the build phase.
 * Gems cannot but used inside of custom blocks, only vanilla, system Ruby.
 * If your custom blocks have errors in them that aren't found until they're executed (which is done whenever you call `mayday`), the stack trace won't be very helpful in debugging (because there is no source map from the build phase back to your `Maydayfile` code)
