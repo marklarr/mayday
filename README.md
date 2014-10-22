@@ -10,8 +10,10 @@ $ gem install mayday
 Create a Maydayfile
 
 ```sh
-mayday init
+$ mayday init
 ```
+
+Add some warning and error checks to that file
 
 ```ruby
 # Maydayfile
@@ -58,6 +60,8 @@ Next time you build your project, your errors and warnings will be flagged
 ![Mayday warnings and errors in Xcode](https://raw.githubusercontent.com/marklarr/mayday/master/docs/example.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6bWFya2xhcnIvbWF5ZGF5L21hc3Rlci9kb2NzL2V4YW1wbGUuanBnIiwiZXhwaXJlcyI6MTQxNDM5MDIxNH0%3D--e7969b95aea1bc76749ae9226d2ac5ffef0cf322)
 
 ![Mayday warnings and errors in Xcode, inline](https://raw.githubusercontent.com/marklarr/mayday/master/docs/example_inline.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6bWFya2xhcnIvbWF5ZGF5L21hc3Rlci9kb2NzL2V4YW1wbGVfaW5saW5lLmpwZyIsImV4cGlyZXMiOjE0MTQzOTAzMzh9--bc9abbe40843317e7b6a30a9521ebf6ae457ece2)
+
+Since Ruby is installed by default on OSX, the warnings and errors will work for anybody building your project, even if they don't have RVM, RubyGems, or mayday.
 
 ### Options
 
