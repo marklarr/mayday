@@ -13,9 +13,9 @@ module Mayday
       @script_generator = ScriptGenerator.new
     end
 
-    def require(mod_name)
+    def require(lib_name)
       super
-      @script_generator.libs_to_require << mod_name
+      @script_generator.libs_to_require << lib_name
     end
 
     def to_target_integrator
