@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Mayday::UserDefinitions do
 
   def parse_build_output(opts={})
-    extra_test_flags = opts[:test] ? "-sdk iphonesimulator test" : ""
-    output =`xcodebuild -project spec/test_fixtures/Fixtures/Fixtures.xcodeproj/ -scheme Fixtures -configuration Debug #{extra_test_flags}`
+    extra_test_flags = opts[:test] ? "test" : ""
+    output =`xcodebuild -project spec/test_fixtures/Fixtures/Fixtures.xcodeproj/ -scheme Fixtures -sdk iphonesimulator #{extra_test_flags}`
     exitstatus = $?.exitstatus
     files_to_lines_to_warnings_hash = {}
     output.split("\n").each do |line|

@@ -6,16 +6,18 @@ require 'pathname'
 module Mayday
   class ScriptGenerator
 
-    attr_accessor :flags
+    attr_accessor :flags, :libs_to_require
 
     def initialize
       self.flags = []
+      self.libs_to_require = []
     end
 
     def to_ruby(opts={})
       opts[:exit_after] = true if opts[:exit_after] == nil;
       opts[:output] = true if opts[:output] == nil;
 
+      require_lines = libs_to_require.map { |lib_to_require| "require '#{lib_to_require}'" }.join("\n")
       function_defs = flags.map(&:function_def_string).join
       exit_chunk = if opts[:exit_after]
         <<-CODE
@@ -36,6 +38,8 @@ end
       <<-CODE
 # encoding: utf-8
 Encoding.default_external = "utf-8"
+
+#{require_lines}
 
 #{function_defs}
 

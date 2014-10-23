@@ -1,6 +1,11 @@
+require 'cmath'
+
 xcode_proj "Fixtures/Fixtures.xcodeproj"
 
+CMath.sin(2)
+
 warning :line, :language => "swift" do |line|
+  CMath.sin(2)
   line.length > 120 ? "Length of line #{line.length} is longer than 120 characters!" : false
 end
 

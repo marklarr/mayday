@@ -13,6 +13,11 @@ module Mayday
       @script_generator = ScriptGenerator.new
     end
 
+    def require(mod_name)
+      super
+      @script_generator.libs_to_require << mod_name
+    end
+
     def to_target_integrator
       instance_eval(@mayday_file.read, @mayday_file.path, 0)
       validate_xcode_proj
