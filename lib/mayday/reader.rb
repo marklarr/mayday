@@ -23,14 +23,17 @@ module Mayday
       real_xcodeproj_path = File.join(Pathname.new(@mayday_file.path).realpath.parent, xcode_proj_path)
       @xcode_proj = Xcodeproj::Project.open(real_xcodeproj_path)
     end
+    private :xcode_proj
 
     def warning_regex(message, regex, options={})
       abstract_flag_regex(Warning, message, regex, options)
     end
+    private :warning_regex
 
     def error_regex(message, regex, options={})
       abstract_flag_regex(Error, message, regex, options)
     end
+    private :error_regex
 
     def validate_xcode_proj
       unless @xcode_proj
