@@ -51,7 +51,7 @@ module Mayday
       if native_targets.count > 0
         native_targets
       else
-        puts "Could not find any native targets that have no target dependencies".red
+        puts "Could not find any native targets".red
         abort
       end
     end
