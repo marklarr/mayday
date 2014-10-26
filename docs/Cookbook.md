@@ -2,9 +2,8 @@
 
 The mayday cookbook contains common warning/error checks that are ready to use out-of-the-box and can be customized as you please.
 
-[Reminders](#reminders)
-
-[Lint](#lint)
+* [Reminders](#reminders)
+* [Lint](#lint)
 
 ## Reminders
 
