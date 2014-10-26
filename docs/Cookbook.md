@@ -2,8 +2,9 @@
 
 The mayday cookbook contains common warning/error checks that are ready to use out-of-the-box and can be customized as you please.
 
-[Reminders](#Reminders)
-[Lint](#Lint)
+[Reminders](#reminders)
+
+[Lint](#lint)
 
 ## Reminders
 
@@ -20,10 +21,12 @@ warning_regex 'FIXME', /\s*\/\/\s*FIXME:/
 ## Lint
 
 ```ruby
-warning :line { |line| line.length > 120 ? "Line is #{line.length} characters long" : false }
+# Warning for lines that are more than 120 columns long
+warning :line { |line| line.length > 120 ? "Line is #{line.length} columns long" : false }
 ```
 
 ```ruby
+# Warning for files that are more than 500 lines long
 warning :file do |entire_file|
   max_number_of_lines = 500
   
