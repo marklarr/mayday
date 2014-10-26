@@ -78,6 +78,10 @@ Since Ruby is installed by default on OSX, the warnings and errors will work for
 * `exclusions` doesn't run on files that have an absolute path that matches the provided [globs](http://en.wikipedia.org/wiki/Glob_(programming)). Accepts an array.
   * `warning :line, :exclude => ["*/Pods/*"] do ...` **Note, Pods are excluded by default by mayday**
 
+## Cookbook
+
+For some ideas on how to start using mayday, see the [cookbook](https://github.com/marklarr/mayday/blob/master/docs/Cookbook.md)
+
 ## Benchmarking
 
 You may be concerned about how much overhead this will add to your build process. To see how quickly your `mayday` checks execute, use 
