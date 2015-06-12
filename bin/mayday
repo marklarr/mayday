@@ -9,11 +9,13 @@ Clamp do
   self.default_subcommand = "up"
 
   MAYDAY_FILE_PATH = "Maydayfile"
+  
+  option "--rules", "RULES_FILE", "The file containing Mayday rules", :default => MAYDAY_FILE_PATH, :attribute_name => :mayday_file_path
 
   subcommand "init", "Creates a new Maydayfile" do
     def execute
       puts "Creating a new Maydayfile..."
-      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).init
+      Mayday::UserDefinitions.new(mayday_file_path).init
       puts "Done!".green
     end
   end
@@ -21,7 +23,7 @@ Clamp do
   subcommand "up", "Integrate the warnings and errors from Maydayfile into your Xcode project" do
     def execute
       puts "Integrating mayday into your project..."
-      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).up
+      Mayday::UserDefinitions.new(mayday_file_path).up
       puts "Done!".green
     end
   end
@@ -29,14 +31,20 @@ Clamp do
   subcommand "down", "Remove the warnings and errors from Maydayfile into your Xcode project" do
     def execute
       puts "Removing mayday from your project..."
-      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).down
+      Mayday::UserDefinitions.new(mayday_file_path).down
       puts "Done!".green
     end
   end
 
   subcommand "benchmark", "Output benchmark results of running your Maydayfile errors and warnings on your Xcode project" do
     def execute
-      Mayday::UserDefinitions.new(MAYDAY_FILE_PATH).benchmark
+      Mayday::UserDefinitions.new(mayday_file_path).benchmark
+    end
+  end
+  
+  subcommand "run", "Run mayday from the command line" do
+    def execute
+      Mayday::UserDefinitions.new(mayday_file_path).run
     end
   end
 end

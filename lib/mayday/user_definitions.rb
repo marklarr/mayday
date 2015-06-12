@@ -41,6 +41,12 @@ warning_regex 'TODO:', /\\s+\\/\\/\\s?TODO:/
         Reader.new(file).to_target_integrator.benchmark
       end
     end
+    
+    def run
+      mayday_file do |file|
+        Reader.new(file).to_target_integrator.run
+      end
+    end
 
     def mayday_file
       unless File.exist?(@mayday_file_path)

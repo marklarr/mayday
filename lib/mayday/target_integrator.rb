@@ -42,6 +42,11 @@ module Mayday
         benchmarker.report('Mayday') { eval(@script_generator.to_ruby(:exit_after => false, :output => false)) }
       end
     end
+    
+    def run
+      ENV["SRCROOT"] = @project.path.parent.to_s
+      eval(@script_generator.to_ruby(:exit_after => false, :output => true))
+    end
 
     def native_targets_to_integrate
       native_targets = @project.targets.select do |target|
