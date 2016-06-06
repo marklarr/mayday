@@ -26,5 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'clamp', '~> 0.6.3'
   spec.add_dependency 'colorize', '~> 0.7.3'
   spec.add_dependency 'sourcify', '~> 0.6.0rc4'
-  spec.add_dependency "xcodeproj", '>= 0.28.2', '< 1.1.0'
+  spec.add_dependency "xcodeproj", '>= 0.28.2', '< 1.2.0'
 end
